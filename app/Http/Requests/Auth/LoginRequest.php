@@ -45,7 +45,16 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+        if($this->routeIs('owner.*')) {
+            $guard = 'owners';
+        } else if($this->routeIs('admin.*')) {
+            $guard = 'admin';
+        } else {
+            $guard = 'users';
+        }
+         
+        // attempt() は最初の引数に キー/値のペア の配列を受けとり、その値をDBテーブルの値と照合させる。
+        if (! Auth::guard($guard)->attempt($this->only('email', 'password'), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
