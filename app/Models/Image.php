@@ -14,4 +14,8 @@ class Image extends Model
         'filename'
     ];
 
+    public function owner()
+    {
+        return $this->belongsTo(Owner::class);
+    }
 }
