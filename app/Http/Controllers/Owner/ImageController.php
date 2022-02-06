@@ -18,7 +18,7 @@ class ImageController extends Controller
         $this->middleware('auth:owners');
 
         $this->middleware(function($request, $next) {
-            $id = $request->route()->parameter('image');  // shopのid取得
+            $id = $request->route()->parameter('image');
             if(!is_null($id)) {
                 $imagesOwnerId = Image::findOrFail($id)->owner->id;
                 $imageId = (int)$imagesOwnerId; // キャスト 文字列⇒数値に型変換
