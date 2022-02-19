@@ -5,7 +5,7 @@
   if($name === 'image4') { $modal = 'modal-4'; }
   if($name === 'image5') { $modal = 'modal-5'; }
   $cImage = $currentImage ?? '';
-  $cId = $currentTd ?? '';
+  $cId = $currentId ?? '';
 @endphp
 
 <div class="modal micromodal-slide" id="{{ $modal }}" aria-hidden="true">
